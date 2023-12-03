@@ -9,7 +9,7 @@ const TodosPage = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchTodos());
-  }, []);
+  }, [dispatch]);
 
   if (status === "pending") {
     return <h3>Loading...</h3>;
