@@ -6,9 +6,17 @@ export const postApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:3005",
   }),
+  tagTypes: ["Posts"],
   endpoints: (builder) => ({
     getPosts: builder.query({
       query: () => `/posts`,
+      providesTags: (result) => {
+        const data = [
+          ...result.map(({ id }) => ({ type: "Posts", id })),
+          { type: "Posts", id: "LIST" },
+        ];
+        return data;
+      },
     }),
     addPost: builder.mutation({
       query: (data) => {
@@ -18,6 +26,7 @@ export const postApi = createApi({
           body: data,
         };
       },
+      invalidatesTags: [{ type: "Posts", id: "LIST" }],
     }),
   }),
 });

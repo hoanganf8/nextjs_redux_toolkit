@@ -8,8 +8,9 @@ const PostForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     addPost({ title });
+    setTitle("");
   };
-  console.log(result);
+
   return (
     <form onSubmit={handleSubmit}>
       <input
